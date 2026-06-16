@@ -21,16 +21,16 @@ TravelSync helps users discover travel destinations and book hotels based on the
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](screenshots/picture1.png)
+![Home Page](Screenshots/picture3.png)
 
 ### Hotel Booking
-![Booking Page](screenshots/picure18.png)
+![Booking Page](Screenshots/picure18.png)
 
 ### Chatbot
-![Chatbot](screenshots/picture3.png)
+![Chatbot](Screenshots/picture3.png)
 
 ### Login & OTP Verification
-![Login](screenshots/picture19.png)
+![Login](Screenshots/picture19.png)
 
 ## 🛠️ Technologies Used
 
