@@ -24,7 +24,7 @@ TravelSync helps users discover travel destinations and book hotels based on the
 ![Home Page](Screenshots/Picture3.png)
 
 ### Hotel Booking
-![Booking Page](Screenshots/Picure18.png)
+![Booking Page](Screenshots/Picture18.png)
 
 ### Chatbot
 ![Chatbot](Screenshots/Picture3.png)
