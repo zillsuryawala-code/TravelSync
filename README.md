@@ -18,6 +18,20 @@ TravelSync helps users discover travel destinations and book hotels based on the
 - MySQL database integration
 - Dark mode support
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](screenshots/picture1.png)
+
+### Hotel Booking
+![Booking Page](screenshots/picure18.png)
+
+### Chatbot
+![Chatbot](screenshots/picture3.png)
+
+### Login & OTP Verification
+![Login](screenshots/picture19.png)
+
 ## 🛠️ Technologies Used
 
 ### Frontend
