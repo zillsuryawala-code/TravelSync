@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmedabad - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleshmd.css') }}">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('explore') }}">Explore</a>
+                <a href="#">Hotels</a>
+                <a href="#">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="city-details">
+            <div class="container">
+                <h1>Ahmedabad</h1>
+                <p>The cultural and economic heart of Gujarat, known for its rich history, vibrant festivals, and delicious cuisine.</p>
+                
+                <div class="attractions">
+                    <h2>Top Attractions</h2>
+                    <ul>
+                        <li>
+                            <img src="{{ url_for('static', filename='sabarmati.avif') }}" alt="Sabarmati Ashram">
+                            <strong>Sabarmati Ashram</strong> - The historic home of Mahatma Gandhi, a place of peace and reflection.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='kankaria-lake-banner.jpg') }}" alt="Kankaria Lake">
+                            <strong>Kankaria Lake</strong> - A picturesque lake with a zoo, toy train, and balloon rides.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='Adalaj.webp') }}" alt="Adalaj Stepwell">
+                            <strong>Adalaj Stepwell</strong> - A stunning example of Indo-Islamic architecture and craftsmanship.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='144785642Ahmedabad_Askhardham.jpg') }}" alt="Swaminarayan Temple">
+                            <strong>Swaminarayan Temple</strong> - A beautifully carved temple dedicated to Lord Swaminarayan.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='sidi.jpg') }}" alt="Sidi Saiyyed Mosque">
+                            <strong>Sidi Saiyyed Mosque</strong> - Famous for its intricate stone latticework windows.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="travel-tips">
+                    <h2>Travel Tips</h2>
+                    <p><strong>Best time to visit:</strong> November to February, when the weather is pleasant.</p>
+                    <p><strong>Must-try food:</strong> Dhokla, Khandvi, and the famous Gujarati Thali.</p

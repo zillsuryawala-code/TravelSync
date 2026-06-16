@@ -1,0 +1,67 @@
+<!-- templates/manage_feedback.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        td textarea {
+            width: 100%;
+            resize: none;
+        }
+
+        .logout {
+            margin-top: 30px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Manage Feedback</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Message</th>
+                    <th>Rating</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fb in feedback %}
+                <tr>
+                    <td>{{ fb.feedback_id }}</td>
+                    <td>{{ fb.user_id }}</td>
+                    <td><textarea readonly rows="3">{{ fb.message }}</textarea></td>
+                    <td>{{ fb.rating }}</td>
+                    <td>{{ fb.submit_date }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_feedback', feedback_id=fb.feedback_id) }}" method="POST" onsubmit="return confirm('Delete this feedback?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="logout" href="{{ url_for('admin_logout') }}">Logout</a>
+    </div>
+</body>
+</html>

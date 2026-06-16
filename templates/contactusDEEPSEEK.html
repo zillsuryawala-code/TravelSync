@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us</title>
+
+  <style>
+    /* ====== Base Reset ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ====== Contact Us Section ====== */
+    #contact {
+      padding: 8rem 1rem;
+      text-align: center;
+      background: #4895ef;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(65, 173, 192, 0.05) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    #contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      position: relative;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #contact p {
+      font-size: 1.2rem;
+      color: #d9d9d9;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-content {
+      display: flex;
+      gap: 2rem;
+      text-align: left;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-form, .contact-info {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      min-width: 300px;
+      height: auto;
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 0.8rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #41adc0;
+      box-shadow: 0 0 10px rgba(65, 173, 192, 0.2);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #41adc0, #3597a8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin: 0.8rem 0;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(65, 173, 192, 0.3);
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .contact-info p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-info p:hover {
+      transform: translateX(5px);
+    }
+
+    .contact-info i {
+      margin-right: 1rem;
+      color: #41adc0;
+      font-size: 1.3rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+    }
+
+    .social-links a {
+      color: #41adc0;
+      font-size: 1.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #3597a8;
+      transform: translateY(-5px) rotate(8deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      #contact h2 {
+        font-size: 2rem;
+      }
+      .contact-form, .contact-info {
+        padding: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    /* ====== Thank You Popup ====== */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      animation: popupAnimation 0.5s ease forwards;
+    }
+
+    .popup-content h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #41adc0;
+    }
+
+    .popup-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .popup-content button {
+      padding: 0.8rem 2rem;
+      background: #41adc0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .popup-content button:hover {
+      background: #3597a8;
+    }
+
+    @keyframes popupAnimation {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .map-container {
+    width: 90%;
+    margin: 2rem auto 5rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+
+  .newsletter {
+    background: linear-gradient(135deg, #4895ef, #41adc0);
+    color: #fff;
+    text-align: center;
+    padding: 4rem 1rem;
+    margin: 4rem auto 0 auto;
+    border-radius: 15px;
+    width: 90%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  .newsletter h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .newsletter p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #f0f0f0;
+  }
+
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .newsletter-form input[type="email"] {
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    width: 300px;
+    max-width: 90%;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .newsletter-form button {
+    padding: 1rem 2rem;
+    background-color: #fff;
+    color: #4895ef;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+  }
+
+
+  </style>
+</head>
+
+<body>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>We would love to hear from you. Please fill out the form below.</p>
+
+  <div class="contact-content">
+    <div class="contact-form">
+      <form onsubmit="showThankYou(); return false;">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <h3>Our Info</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Gujarat, India</p>
+      <p><i class="fas fa-envelope"></i> info@example.com</p>
+      <p><i class="fas fa-phone"></i> +91 12345 67890</p>
+
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  <!-- Add Google Map below contact-content -->
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.7273080408565!2d72.55824947486112!3d23.068716879142204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84f9281f1e27%3A0xa5d2287ab5cd1ef8!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sin!4v1681483229480!5m2!1sen!2sin"
+      width="100%"
+      height="450"
+      style="border:0; border-radius: 12px; margin-top: 2rem;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+    <h2>Join Our Newsletter</h2>
+    <p>Stay updated with the latest travel tips, offers, and destinations!</p>
+    
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" placeholder="Enter your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  
+<!-- Thank You Popup -->
+<div id="thankyou-popup" class="popup">
+  <div class="popup-content">
+    <h2>Thank You!</h2>
+    <p>Your message has been successfully sent. We'll get back to you soon!</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+function showThankYou() {
+  // Show the popup
+  document.getElementById('thankyou-popup').style.display = 'flex';
+
+  // Scroll to top
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+  // Clear form fields
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('message').value = '';
+}
+
+function closePopup() {
+  document.getElementById('thankyou-popup').style.display = 'none';
+}
+</script>
+
+<!-- FontAwesome for icons (you can include this if you haven't) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script>
+    document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from actually submitting
+  
+      // Show popup
+      alert('🎉 Thank you for subscribing to our newsletter!');
+  
+      // Optional: Clear the email input
+      this.reset();
+    });
+  </script>
+  
+
+</body>
+</html>

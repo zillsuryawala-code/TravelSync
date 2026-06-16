@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hotel Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e6f4f7);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 90%;
+        }
+
+        .bot-message {
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 15px;
+            margin-right: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-left: auto;
+        }
+
+        .hotel-card {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .hotel-info {
+            flex: 1;
+        }
+
+        .hotel-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .hotel-rating {
+            color: #f39c12;
+            margin-bottom: 5px;
+        }
+
+        .hotel-price {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.1em;
+        }
+
+        .hotel-address {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f8f9fa;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        #send-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        #send-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        #send-btn:active {
+            transform: translateY(0);
+        }
+
+        .typing-indicator {
+            display: none;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #3498db;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: typing 1s infinite;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chatbot</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                👋 Hello! I'm your AI hotel assistant. I can help you find the perfect hotel based on your preferences.
+
+Please provide:
+1. City you want to stay in (e.g. Ahmedabad)
+2. Your budget per night (₹)
+3. Any specific amenities you need (e.g., Room Service, Restaurant, Internet Access)
+
+I'll find the best matches for you! 🏨
+            </div>
+            <div class="typing-indicator" id="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="chat-input">
+            <div class="input-group">
+                <input type="text" id="location-input" placeholder="Enter city...">
+                <input type="number" id="budget-input" placeholder="Budget per night (₹)">
+            </div>
+            <div class="input-group">
+                <input type="text" id="amenities-input" placeholder="Desired amenities (comma-separated)">
+                <button id="send-btn">Search Hotels</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const locationInput = document.getElementById('location-input');
+        const budgetInput = document.getElementById('budget-input');
+        const amenitiesInput = document.getElementById('amenities-input');
+        const sendBtn = document.getElementById('send-btn');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Static hotel database for Ahmedabad
+
+        const hotelDatabase = [
+            {
+                property_name: "Hotel Ginger",
+                address: "Drive In Road, Ahmedabad",
+                city: "Ahmedabad", 
+                additional_info: "WiFi, Restaurant, AC Rooms, Business Center",
+                price: 1999,
+                rating: 3.5,
+                image: "hotel-ginger.jpg"
+            },
+            {
+                property_name: "Hotel Sai Palace",
+                address: "Shirdi",
+                city: "Shirdi",
+                additional_info: "Temple View, AC, WiFi",
+                price: 1299,
+                rating: 3,
+                image: "hotel-sai.jpg"
+            },
+            {
+                property_name: "Hotel Green View",
+                address: "Mall Road, Manali",
+                city: "Manali",
+                additional_info: "Mountain View, Heater, WiFi",
+                price: 1499,
+                rating: 3,
+                image: "hotel-green.jpg"
+            },
+            {
+                property_name: "Hotel Sunrise",
+                address: "Varkala Beach, Kerala",
+                city: "Varkala",
+                additional_info: "Beach View, AC, Restaurant",
+                price: 1799,
+                rating: 3,
+                image: "hotel-sunrise.jpg"
+            },
+            {
+                property_name: "Hotel Mountain View",
+                address: "Mall Road, Darjeeling",
+                city: "Darjeeling",
+                additional_info: "Mountain View, Room Service, WiFi",
+                price: 1699,
+                rating: 3,
+                image: "hotel-mountain.jpg"
+            },
+            {
+                property_name: "Hotel Pushkar Palace",
+                address: "Pushkar Lake, Pushkar",
+                city: "Pushkar",
+                additional_info: "Lake View, AC, Restaurant",
+                price: 1599,
+                rating: 3,
+                image: "hotel-pushkar.jpg"
+            },
+            {
+                property_name: "Hotel Sea View",
+                address: "Beach Road, Puri",
+                city: "Puri",
+                additional_info: "Sea View, AC, WiFi",
+                price: 1399,
+                rating: 3,
+                image: "hotel-sea.jpg"
+            },
+            {
+                property_name: "Hotel City Heart",
+                address: "Amritsar",
+                city: "Amritsar",
+                additional_info: "Near Golden Temple, AC, Restaurant",
+                price: 1499,
+                rating: 3,
+                image: "hotel-city.jpg"
+            },
+            {
+                property_name: "Hotel Lake View",
+                address: "Mall Road, Mount Abu",
+                city: "Mount Abu",
+                additional_info: "Lake View, Restaurant, WiFi",
+                price: 1599,
+                rating: 3,
+                image: "hotel-lake.jpg"
+            },
+            {
+                property_name: "Hotel Heritage",
+                address: "Old City, Udaipur",
+                city: "Udaipur",
+                additional_info: "Lake View, Restaurant, WiFi",
+                price: 1899,
+                rating: 3,
+                image: "hotel-heritage.jpg"
+            },
+            {
+                property_name: "Hotel Blue Diamond",
+                address: "MG Road, Mysore",
+                city: "Mysore",
+                additional_info: "AC, Restaurant, WiFi",
+                price: 1699,
+                rating: 3,
+                image: "hotel-blue.jpg"
+            }
+        ];
+
+        function generateAIResponse(location, budget, amenities) {
+            const hotels = hotelDatabase.filter(hotel => 
+                hotel.city.toLowerCase() === location.toLowerCase() &&
+                hotel.price <= budget
+            );
+            
+            const filteredHotels = hotels.filter(hotel => {
+                const hasAmenities = amenities.length === 0 || 
+                    amenities.every(a => hotel.additional_info.toLowerCase().includes(a.toLowerCase()));
+                return hasAmenities;
+            });
+
+            if (filteredHotels.length === 0) {
+                return {
+                    message: `I apologize, but I couldn't find any hotels in ${location} within your budget that match your amenity requirements. Would you like to try with a different budget or amenities?`,
+                    hotels: []
+                };
+            }
+
+            const response = {
+                message: `I found ${filteredHotels.length} hotels in ${location} that match your criteria:`,
+                hotels: filteredHotels
+            };
+
+            return response;
+        }
+
+        async function searchHotels() {
+            const location = locationInput.value.trim();
+            const budget = parseInt(budgetInput.value.trim());
+            const amenities = amenitiesInput.value.trim() ? 
+                amenitiesInput.value.split(',').map(a => a.trim()) : [];
+
+            if (!location || !budget) {
+                addMessage("Please provide both location and budget.", false);
+                return;
+            }
+
+            addMessage(`Looking for hotels in ${location} with budget ₹${budget}/night${amenities.length ? ` and amenities: ${amenities.join(', ')}` : ''}`, true);
+            showTypingIndicator();
+
+            // Simulate processing delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            try {
+                const response = generateAIResponse(location, budget, amenities);
+                
+                addMessage(response.message, false);
+
+                response.hotels.forEach(hotel => {
+                    const hotelCard = createHotelCard(hotel);
+                    chatMessages.appendChild(hotelCard);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage("Sorry, I couldn't process your request. Please try again.", false);
+            }
+
+            hideTypingIndicator();
+            clearInputs();
+        }
+
+        function createHotelCard(hotel) {
+            const card = document.createElement('div');
+            card.className = 'hotel-card';
+
+            card.innerHTML = `
+                <img src="${hotel.image}" alt="${hotel.property_name}" class="hotel-image">
+                <div class="hotel-info">
+                    <div class="hotel-name">${hotel.property_name}</div>
+                    <div class="hotel-rating">Rating: ${'⭐'.repeat(hotel.rating)}</div>
+                    <div class="hotel-price">₹${hotel.price} per night</div>
+                    <div class="hotel-address">${hotel.address}</div>
+                    <div class="hotel-amenities">Amenities: ${hotel.additional_info}</div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        function clearInputs() {
+            locationInput.value = '';
+            budgetInput.value = '';
+            amenitiesInput.value = '';
+        }
+
+        sendBtn.addEventListener('click', searchHotels);
+        
+        [locationInput, budgetInput, amenitiesInput].forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    searchHotels();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

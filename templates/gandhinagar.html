@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gandhinagar - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleshmd.css') }}">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('explore') }}">Explore</a>
+                <a href="#">Hotels</a>
+                <a href="#">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="city-details">
+            <div class="container">
+                <h1>Gandhinagar</h1>
+                <p>The serene and well-planned capital city of Gujarat, known for its greenery and architectural marvels.</p>
+
+                <div class="attractions">
+                    <h2>Top Attractions</h2>
+                    <ul>
+                        <li><img src="{{ url_for('static', filename='gandhinagar1.jpg') }}" alt="Akshardham Temple">
+                            <strong>Akshardham Temple</strong> - A grand temple dedicated to Lord Swaminarayan, known for its stunning architecture.
+                        </li>
+                        <li><img src="{{ url_for('static', filename='gandhinagar2.jpg') }}" alt="Children's Park">
+                            <strong>Children's Park</strong> - A fun park with boating facilities, a mini-train, and lush gardens.
+                        </li>
+                        <li><img src="{{ url_for('static', filename='gandhinagar3.jpg') }}" alt="Indroda Nature Park">
+                            <strong>Indroda Nature Park</strong> - Known as India's Jurassic Park, it houses a zoo, botanical garden, and dinosaur fossils.
+                        </li>
+                        <li><img src="{{ url_for('static', filename='gandhinagar4.jpg') }}" alt="Sarita Udyan">
+                            <strong>Sarita Udyan</strong> - A popular picnic spot along the banks of the Sabarmati River.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="travel-tips">
+                    <h2>Travel Tips</h2>
+                    <p><strong>Best time to visit:</strong> November to February for pleasant weather.</p>
+                    <p><strong>Must-try food:</strong> Gujarati Thali, Dhokla, and Handvo.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

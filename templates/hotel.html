@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotels - TravelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styleshotel.css') }}">
+
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <header>
+    <div class="menu">
+      <a href="h1.html" class="logo">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="TravelSync Logo">
+        <span>TravelSync</span>
+      </a>
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('hotel') }}">Hotels</a>
+        <a href="{{ url_for('aboutus') }}">About Us</a>
+        <a href="{{ url_for('contactus') }}">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="search-container">
+    <div class="travel-elements" id="travelElements"></div>
+    <div class="search-content">
+      <h1 class="search-title animate__animated animate__fadeIn">Find Your Perfect Stay</h1>
+      <form id="search-form" class="search-filters animate__animated animate__fadeInUp">
+        <div class="filter-row">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search by hotel name...">
+          <select id="cityFilter" class="form-control">
+            <option value="">All Cities</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Surat">Surat</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Gandhinagar">Gandhinagar</option>
+            <option value="Dwarka">Dwarka</option>
+            <option value="Somnath">Somnath</option>
+            <option value="Rann of Kutch">Rann of Kutch</option>
+            <option value="Bhuj">Bhuj</option>
+          </select>
+          <select id="priceSort" class="form-control">
+            <option value="">Price Range</option>
+            <option value="low">₹0 - ₹3000</option>
+            <option value="medium">₹3000 - ₹6000</option>
+            <option value="high">₹6000+</option>
+          </select>
+          <select id="ratingSort" class="form-control">
+            <option value="">Sort by Rating</option>
+            <option value="high">Highest First</option>
+            <option value="low">Lowest First</option>
+          </select>
+          <button type="button" id="resetBtn" class="form-control book-btn" style="max-width: 150px;">
+            <i class="fas fa-undo"></i> Reset
+          </button>
+          <button type="submit" class="form-control book-btn" style="max-width: 150px;">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main>
+    <section id="hotels">
+      <div id="sectionTitle" class="section-title animate__animated animate__fadeIn">
+        <h2>Featured Hotels in Gujarat</h2>
+        <p>Discover the finest accommodations across Gujarat's most vibrant cities</p>
+      </div>
+  
+      {% for city, hotels in hotels_by_city.items() %}
+  <div class="city-hotels" style="animation-delay: 0.2s">
+    <h3 class="animate__animated animate__fadeIn">{{ city }}</h3>
+    <div class="hotel-grid">
+      
+      {% for hotel in hotels[:3] %}
+      <div class="hotel-card animate__animated animate__fadeInUp" data-animation-delay="{{ 0.1 * loop.index }}">
+        <div class="hotel-image-container">
+          <!-- Swiper Slider -->
+          <div class="swiper hotel-swiper-{{ hotel.hotel_id }}">
+            <div class="swiper-wrapper">
+              {% for img_url in hotel.images %}
+              <div class="swiper-slide">
+                <img src="{{ img_url or url_for('static', filename='default-hotel.jpg') }}" alt="{{ hotel.hotel_name }}" class="hotel-image">
+              </div>
+              {% endfor %}
+            </div>
+            <!-- Optional controls -->
+            <div class="swiper-pagination"></div>
+          </div>
+          <span class="hotel-badge">
+            {{ 'Popular' if loop.index == 1 else 'Best Value' if loop.index == 2 else 'Trending' }}
+          </span>
+        </div>
+
+        <div class="hotel-info">
+          <h4>{{ hotel.hotel_name }}</h4>
+          <div class="hotel-location"><i class="fas fa-map-marker-alt"></i> {{ hotel.location }}</div>
+          <div class="hotel-rating">
+            {% set full_stars = hotel.rating|int %}
+            {% for i in range(full_stars) %}<i class="fas fa-star"></i>{% endfor %}
+            {% for i in range(5 - full_stars) %}<i class="far fa-star"></i>{% endfor %}
+            <span>({{ hotel.rating }}/5)</span>
+          </div>
+          <div class="hotel-price">₹{{ hotel.price }} <span>/ night</span></div>
+          <div class="hotel-amenities">
+            {% for amenity in hotel.amenities.split(',') %}
+            <span class="amenity-tag">{{ amenity.strip() }}</span>
+            {% endfor %}
+          </div>
+          <a href="{{ hotel.hotel_link or '#' }}" class="book-btn"><i class="fas fa-calendar-check"></i> Book Now</a>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% for hotel in hotels[3:] %}
+      <div class="hotel-card hidden-hotel" style="display: none;">
+        <div class="hotel-image-container">
+          <!-- Swiper Slider -->
+          <div class="swiper hotel-swiper-{{ hotel.hotel_id }}">
+            <div class="swiper-wrapper">
+              {% for img_url in hotel.images %}
+              <div class="swiper-slide">
+                <img src="{{ img_url or url_for('static', filename='default-hotel.jpg') }}" alt="{{ hotel.hotel_name }}" class="hotel-image">
+              </div>
+              {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <span class="hotel-badge">Featured</span>
+        </div>
+
+        <div class="hotel-info">
+          <h4>{{ hotel.hotel_name }}</h4>
+          <div class="hotel-location"><i class="fas fa-map-marker-alt"></i> {{ hotel.location }}</div>
+          <div class="hotel-rating">
+            {% set full_stars = hotel.rating|int %}
+            {% for i in range(full_stars) %}<i class="fas fa-star"></i>{% endfor %}
+            {% for i in range(5 - full_stars) %}<i class="far fa-star"></i>{% endfor %}
+            <span>({{ hotel.rating }}/5)</span>
+          </div>
+          <div class="hotel-price">₹{{ hotel.price }} <span>/ night</span></div>
+          <div class="hotel-amenities">
+            {% for amenity in hotel.amenities.split(',') %}
+            <span class="amenity-tag">{{ amenity.strip() }}</span>
+            {% endfor %}
+          </div>
+          <a href="{{ hotel.hotel_link or '#' }}" class="book-btn"><i class="fas fa-calendar-check"></i> Book Now</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if hotels|length > 3 %}
+    <button class="show-more-btn" data-city="{{ city }}" onclick="toggleHotels(this)">Show More <i class="fas fa-chevron-down"></i></button>
+    {% endif %}
+  </div>
+{% endfor %}
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const travelContainer = document.getElementById('travelElements');
+    
+      // Animated clouds
+      for (let i = 0; i < 5; i++) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.style.width = `${100 + Math.random() * 100}px`;
+        cloud.style.height = `${60 + Math.random() * 40}px`;
+        cloud.style.top = `${10 + Math.random() * 30}%`;
+        cloud.style.animationDuration = `${60 + Math.random() * 60}s`;
+        cloud.style.animationDelay = `${Math.random() * 20}s`;
+        travelContainer.appendChild(cloud);
+      }
+    
+      // Animated paper planes
+      for (let i = 0; i < 2; i++) {
+        const plane = document.createElement('div');
+        plane.classList.add('paper-plane');
+        plane.style.animationDuration = `${15 + Math.random() * 10}s`;
+        plane.style.animationDelay = `${Math.random() * 5}s`;
+        travelContainer.appendChild(plane);
+      }
+    
+      // Swiper sliders
+      document.querySelectorAll('.swiper').forEach((swiperEl) => {
+        new Swiper(swiperEl, {
+          loop: true,
+          pagination: {
+            el: swiperEl.querySelector('.swiper-pagination'),
+            clickable: true,
+          },
+          navigation: {
+            nextEl: swiperEl.querySelector('.swiper-button-next'),
+            prevEl: swiperEl.querySelector('.swiper-button-prev'),
+          },
+        });
+      });
+    
+      // Show more/less functionality
+      document.querySelectorAll('.show-more-btn').forEach(button => {
+        button.addEventListener('click', function () {
+          const citySection = this.closest('.city-hotels');
+          const hiddenHotels = citySection.querySelectorAll('.hidden-hotel');
+          const isShowingMore = this.textContent.includes('More');
+    
+          hiddenHotels.forEach(hotel => {
+            hotel.style.display = isShowingMore ? 'block' : 'none';
+          });
+    
+          this.innerHTML = isShowingMore
+            ? 'Show Less <i class="fas fa-chevron-up"></i>'
+            : 'Show More <i class="fas fa-chevron-down"></i>';
+    
+          if (!isShowingMore) {
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+    
+      // SEARCH + SORT FILTER
+      const searchForm = document.getElementById('search-form');
+      if (searchForm) {
+        searchForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          applyFilters();
+        });
+      }
+    
+      document.getElementById('resetBtn')?.addEventListener('click', function () {
+        document.getElementById('searchBar').value = '';
+        document.getElementById('cityFilter').value = '';
+        document.getElementById('priceSort').value = '';
+        document.getElementById('ratingSort').value = '';
+        applyFilters();
+      });
+    
+      function applyFilters() {
+        const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+        const cityFilter = document.getElementById('cityFilter').value.toLowerCase();
+        const priceSort = document.getElementById('priceSort').value;
+        const ratingSort = document.getElementById('ratingSort').value;
+    
+        console.log(`Filters applied: search="${searchTerm}", city="${cityFilter}", price="${priceSort}", rating="${ratingSort}"`);
+    
+        document.querySelectorAll('.city-hotels').forEach(citySection => {
+          const cityName = citySection.querySelector('h3')?.textContent.toLowerCase();
+          const hotelCards = Array.from(citySection.querySelectorAll('.hotel-card'));
+    
+          let filteredCards = hotelCards.filter(card => {
+            const name = card.querySelector('h4')?.textContent.toLowerCase() || '';
+            const matchesName = name.includes(searchTerm);
+            const matchesCity = !cityFilter || cityFilter === cityName;
+            return matchesName && matchesCity;
+          });
+    
+          // Sort
+          if (priceSort) {
+            filteredCards.sort((a, b) => {
+              const priceA = parseInt(a.querySelector('.hotel-price')?.textContent.replace(/\D/g, '') || 0);
+              const priceB = parseInt(b.querySelector('.hotel-price')?.textContent.replace(/\D/g, '') || 0);
+              return priceSort === 'low' ? priceA - priceB : priceB - priceA;
+            });
+          }
+          if (ratingSort) {
+            filteredCards.sort((a, b) => {
+              const ratingA = parseFloat(a.querySelector('.hotel-rating span')?.textContent.replace(/[^\d.]/g, '')) || 0;
+              const ratingB = parseFloat(b.querySelector('.hotel-rating span')?.textContent.replace(/[^\d.]/g, '')) || 0;
+              return ratingSort === 'high' ? ratingB - ratingA : ratingA - ratingB;
+            });
+          }
+    
+          // Hide all and show only filtered
+          hotelCards.forEach(card => {
+            card.style.display = 'none';
+          });
+          filteredCards.forEach(card => {
+            card.style.display = 'block';
+          });
+    
+          // Optionally hide/show 'Show More' button if filtering hides some
+          const showMoreBtn = citySection.querySelector('.show-more-btn');
+          if (filteredCards.length <= 3 || searchTerm || cityFilter || priceSort || ratingSort) {
+            showMoreBtn?.classList.add('hidden');
+          } else {
+            showMoreBtn?.classList.remove('hidden');
+          }
+        });
+      }
+    });
+
+    let lastScrollTop = 0;
+const menu = document.querySelector('header');
+
+window.addEventListener('scroll', function () {
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop) {
+      menu.style.transform = 'translateY(-100%)';
+  } else {
+      menu.style.transform = 'translateY(0)';
+  }
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
+
+    </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Gujarat - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleexplore.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+          <a href="h1.html" class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="TravelSync Logo">
+            <span>TravelSync</span>
+          </a>
+          <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('explore') }}">Explore</a>
+            <a href="{{ url_for('hotel') }}">Hotels</a>
+            <a href="{{ url_for('aboutus') }}">About Us</a>
+            <a href="{{ url_for('contactus') }}">Contact Us</a>
+          </nav>
+        </div>
+    </header>
+
+    <section id="explore">
+        <div class="container">
+            <section class="about-hero">
+                <h1>Explore Gujarat</h1>
+                <p style="color: #ffffff;">Discover the best destinations in Gujarat's most vibrant cities.</p>
+            </section>
+            <div class="search-filter">
+                <input type="text" class="search-bar" placeholder="Search destinations...">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cultural">Cultural</button>
+                <button class="filter-btn" data-filter="spiritual">Spiritual</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+            </div>
+
+            <!-- Destination Grid -->
+            <div class="destination-grid">
+                <!-- Ahmedabad -->
+                <div class="destination-card" data-city="ahmedabad" data-category="cultural">
+                    <img src="{{ url_for('static', filename='riverfront.jpg') }}" alt="Ahmedabad">
+                    <div class="card-content">
+                        <h3>Ahmedabad</h3>
+                        <p>The cultural and economic heart of Gujarat, known for its rich history and vibrant festivals.</p>
+                        <a href="{{ url_for('ahmedabad') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Surat -->
+                <div class="destination-card" data-city="surat" data-category="cultural">
+                    <img src="{{ url_for('static', filename='surat.avif') }}" alt="Surat">
+                    <div class="card-content">
+                        <h3>Surat</h3>
+                        <p>A bustling city famous for its diamond industry, textiles, and delicious street food.</p>
+                        <a href="{{ url_for('surat') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Baroda -->
+                <div class="destination-card" data-city="baroda" data-category="cultural">
+                    <img src="{{ url_for('static', filename='baroda.jpg') }}" alt="Baroda">
+                    <div class="card-content">
+                        <h3>Baroda (Vadodara)</h3>
+                        <p>A city of palaces, museums, and lush gardens, blending tradition with modernity.</p>
+                        <a href="{{ url_for('baroda') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Rajkot -->
+                <div class="destination-card" data-city="rajkot" data-category="cultural">
+                    <img src="{{ url_for('static', filename='rajkot.jpeg') }}" alt="Rajkot">
+                    <div class="card-content">
+                        <h3>Rajkot</h3>
+                        <p>A vibrant city blending history, culture, and modern living, famous for its Kathiyawadi traditions.</p>
+                        <a href="{{ url_for('rajkot') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Gandhinagar -->
+                <div class="destination-card" data-city="gandhinagar" data-category="cultural">
+                    <img src="{{ url_for('static', filename='gandhinagar.jpg') }}" alt="Gandhinagar">
+                    <div class="card-content">
+                        <h3>Gandhinagar</h3>
+                        <p>The serene capital city known for its greenery, Akshardham Temple, and planned architecture.</p>
+                        <a href="{{ url_for('gandhinagar') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Dwarka -->
+                <div class="destination-card" data-city="dwarka" data-category="spiritual">
+                    <img src="{{ url_for('static', filename='dwarka.jpg') }}" alt="Dwarka">
+                    <div class="card-content">
+                        <h3>Dwarka</h3>
+                        <p>The sacred city believed to be Lord Krishna's kingdom, known for Dwarkadhish Temple and beaches.</p>
+                        <a href="{{ url_for('dwarka') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Somnath -->
+                <div class="destination-card" data-city="somnath" data-category="spiritual">
+                    <img src="{{ url_for('static', filename='somnath.jpg') }}" alt="Somnath">
+                    <div class="card-content">
+                        <h3>Somnath</h3>
+                        <p>One of the twelve Jyotirlinga shrines of Lord Shiva, located by the beautiful Arabian Sea.</p>
+                        <a href="{{ url_for('somnath') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Kutch -->
+                <div class="destination-card" data-city="kutch" data-category="nature">
+                    <img src="{{ url_for('static', filename='kutch.avif') }}" alt="Kutch">
+                    <div class="card-content">
+                        <h3>Kutch</h3>
+                        <p>Home to the famous Rann of Kutch, white desert festivals, and rich handicraft traditions.</p>
+                        <a href="{{ url_for('kutch') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+
+                <!-- Bhuj -->
+                <div class="destination-card" data-city="bhuj" data-category="cultural">
+                    <img src="{{ url_for('static', filename='bhuj.jpg') }}" alt="Bhuj">
+                    <div class="card-content">
+                        <h3>Bhuj</h3>
+                        <p>A gateway to Kutch, Bhuj is known for its palaces, vibrant bazaars, and historical sites.</p>
+                        <a href="{{ url_for('bhuj') }}" class="explore-btn">Explore More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../JavaScript/explorej.js"></script>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='explore.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Search functionality
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const cards = document.querySelectorAll('.destination-card');
+                cards.forEach(card => {
+                    const city = card.dataset.city.toLowerCase();
+                    card.style.display = city.includes(searchTerm) ? 'block' : 'none';
+                });
+            });
+
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+                    const cards = document.querySelectorAll('.destination-card');
+
+                    cards.forEach(card => {
+                        const category = card.dataset.category;
+                        card.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
+                    });
+
+                    // Update active button state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

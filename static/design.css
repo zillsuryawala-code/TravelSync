@@ -1,0 +1,419 @@
+/* Import Google Font with better font-display */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Modern CSS Variables - Light Blue Theme */
+:root {
+  --primary: #4a89dc;
+  --primary-hover: #3a70c2;
+  --primary-light: #e6f0fa;
+  --primary-transparent: rgba(74, 137, 220, 0.1);
+  --text-dark: #2c3e50;
+  --text-medium: #34495e;
+  --text-light: #7f8c8d;
+  --bg-light: #f5f9ff;
+  --white: #fff;
+  --shadow-sm: 0 2px 8px rgba(74, 137, 220, 0.1);
+  --shadow-md: 0 4px 12px rgba(74, 137, 220, 0.15);
+  --shadow-lg: 0 8px 24px rgba(74, 137, 220, 0.2);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --gradient: linear-gradient(135deg, #4a89dc 0%, #5dade2 100%);
+}
+
+/* Base Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-light);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-medium);
+}
+
+/* Container for better content alignment */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header with gradient background */
+header {
+  background: var(--gradient);
+  color: var(--white);
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+h1 {
+  color: var(--white);
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  position: relative;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  animation: fadeInDown 0.8s ease-out both;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  opacity: 0.9;
+  margin-top: 10px;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+/* Hotel List */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Hotel Card with Modern Design */
+/* Enhanced Hotel Card Hover Effects */
+li {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
+
+}
+
+li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(74, 137, 220, 0.1) 0%, rgba(255,255,255,0) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+li:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(74, 137, 220, 0.25);
+}
+
+li:hover::before {
+  opacity: 1;
+}
+
+/* Glow effect on hover */
+li:hover h3 {
+  text-shadow: 0 0 8px rgba(74, 137, 220, 0.3);
+}
+
+/* Image zoom effect on hover */
+li:hover .hotel-images img.active {
+  transform: scale(1.03);
+}
+
+/* Floating amenities effect */
+.card-description {
+  transition: transform 0.3s ease;
+}
+
+li:hover .card-description {
+  transform: translateY(-4px);
+}
+
+/* Button pulse effect */
+li:hover a.view-hotel {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-3px) scale(1); box-shadow: 0 6px 12px rgba(74, 137, 220, 0.3); }
+  50% { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 16px rgba(74, 137, 220, 0.4); }
+  100% { transform: translateY(-3px) scale(1); box-shadow: 0 6px 12px rgba(74, 137, 220, 0.3); }
+}
+
+/* Border animation */
+li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease-out;
+}
+
+li:hover::after {
+  transform: scaleX(1);
+}
+
+/* Card Header */
+.card-header {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hotel Title */
+h3 {
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 20px;
+  background: var(--gradient);
+  position: relative;
+}
+
+h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 3px;
+}
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-description {
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* View Hotel Button */
+.card-footer {
+  margin-top: auto;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+} 
+
+a.view-hotel {
+  text-decoration: none;
+  background: var(--gradient);
+  color: var(--white);
+  padding: 12px 8px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(74, 137, 220, 0.2);
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+a.view-hotel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+a.view-hotel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(74, 137, 220, 0.3);
+}
+
+a.view-hotel:hover::before {
+  left: 100%;
+}
+
+/* Image Slider Styles */
+/* Image Slider Styles */
+.hotel-images {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.hotel-images img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hotel-images img.active {
+  opacity: 1;
+  position: relative;
+}
+
+/* Slider Navigation Dots - Moved inside images */
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dot.active {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Animated Background Elements */
+.decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--primary-transparent);
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 150px;
+  height: 150px;
+  bottom: 15%;
+  right: 8%;
+  animation-delay: 0.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  ul {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .hotel-images {
+    height: 180px;
+  }
+}
+
+/* Add animation delays for staggered effects */
+li:nth-child(1) { animation-delay: 0.1s; }
+li:nth-child(2) { animation-delay: 0.2s; }
+li:nth-child(3) { animation-delay: 0.3s; }
+li:nth-child(4) { animation-delay: 0.4s; }
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.6; transform: scale(0.98); }
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}

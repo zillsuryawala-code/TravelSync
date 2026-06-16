@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Gujarat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='demo2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('explore') }}">Explore</a>
+                <a href="{{ url_for('hotel') }}">Hotels</a>
+                <a href="{{ url_for('aboutus') }}">About Us</a>
+                <a href="{{ url_for('contactus') }}">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{{ url_for('static', filename='m13.jpg') }}" alt="Featured Gujarat">
+                    <div class="img-overlay">
+                        <p>Let's Travel</p>
+                        <h2><span>Discover Gujarat</span></h2>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="{{ url_for('static', filename='m10.jpg') }}" alt="Somnath">
+                    <div class="img-overlay">
+                        <p>Let's Travel</p>
+                        <h2>Discover Gujarat</h2>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="{{ url_for('static', filename='m15.jpg') }}" alt="Featured Gujarat">
+                    <div class="img-overlay">
+                        <p>Let's Travel</p>
+                        <h2><span>Discover Gujarat</span></h2>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="{{ url_for('static', filename='m18.jpg') }}" alt="Featured Gujarat">
+                    <div class="img-overlay">
+                        <p>Let's Travel</p>
+                        <h2><span>Discover Gujarat</span></h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+        </div>
+    </main>
+
+    <section id="location-search">
+        <div class="container">
+            <div class="form-wrapper">
+                <form class="search-form" action="/store_history" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select name="destination" class="form-control" required>
+                                <option value="">Select Destination</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Surat">Surat</option>
+                                <option value="Vadodara">Vadodara</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="number" name="days" placeholder="Days?" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <i class="fas fa-rupee-sign"></i>
+                            <input type="number" name="total_amount" placeholder="Total Amount" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="far fa-calendar"></i>
+                            <input type="date" name="start_date" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <i class="far fa-calendar"></i>
+                            <input type="date" name="end_date" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="primary-btn">Search Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    
+    
+     <section id="Top-Destination">
+        <div class="container">
+            <p class="heading-normal">Top Places</p>
+            <h2 class="heading">Popular<span>Destination</span></h2>
+            
+            <!-- First Row -->
+            <div class="top-destination-wrapper swiper2">
+                <div class="swiper-wrapper">
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c1.jpg') }}" alt="Dwarkadheesh Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c5.jpg') }}" alt="Somnath Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='m4.jpg') }}" alt="Akshardham Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='m14.jpg') }}" alt="Somnath">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c2.jpg') }}" alt="Gujarat Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c3.jpg') }}" alt="Gujarat Monument">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c5.jpg') }}" alt="Gujarat Landmark">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<br> <br> <br>
+            <!-- Second Row -->
+            <div class="top-destination-wrapper swiper3">
+                <div class="swiper-wrapper">
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c6.jpg') }}" alt="Dwarkadheesh Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c7.jpg') }}" alt="Somnath Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='m4.jpg') }}" alt="Akshardham Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='m14.jpg') }}" alt="Somnath">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c2.jpg') }}" alt="Gujarat Temple">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c3.jpg') }}" alt="Gujarat Monument">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel swiper-slide">
+                        <img src="{{ url_for('static', filename='c5.jpg') }}" alt="Gujarat Landmark">
+                        <div class="carousel-img-overlay">
+                            <div class="img-content">
+                                <div class="hidden-content-carousel">
+                                    <a href="#"><span>Explore</span><i class="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+ <div class="testimonials-header">
+    <h1>What Our Travelers Say</h1>
+    <p>Read genuine experiences from people who explored incredible destinations with us</p>
+</div>
+
+<div class="testimonials-container" id="testimonialsContainer">
+    <!-- Testimonials will be inserted here by JavaScript -->
+</div> 
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p style="color: white;">We'd love to hear from you! Reach out to us for any inquiries or feedback.</p>
+            
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form action="{{ url_for('submit_feedback') }}" method="POST">
+                        <!-- Name Field -->
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+    
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+    
+                        <!-- Message Field -->
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Enter your feedback" required></textarea>
+                        </div>
+    
+                        <!-- Rating Field -->
+                        <div class="form-group">
+                            <label for="rating">Rate Us (1-5)</label>
+                            <select id="rating" name="rating" required>
+                                <option value="1">1 ⭐</option>
+                                <option value="2">2 ⭐</option>
+                                <option value="3">3 ⭐</option>
+                                <option value="4">4 ⭐</option>
+                                <option value="5">5 ⭐</option>
+                            </select>
+                        </div>
+    
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-btn">Submit Feedback</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Our Office</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 AI Street, Ahmedabad, Gujarat, India</p>
+                    <p><i class="fas fa-phone"></i> +91 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@aitours.com</p>
+                    
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='demo3.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vadodara - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleshmd.css') }}">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('explore') }}">Explore</a>
+                <a href="#">Hotels</a>
+                <a href="#">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="city-details">
+            <div class="container">
+                <h1>Vadodara (Baroda)</h1>
+                <p>The cultural capital of Gujarat, known for its palaces, museums, and lush gardens.</p>
+                
+                <div class="attractions">
+                    <h2>Top Attractions</h2>
+                    <ul>
+                        <li>
+                            <img src="{{ url_for('static', filename='laxmi.jpg') }}" alt="Laxmi Vilas Palace">
+                            <strong>Laxmi Vilas Palace</strong> - A stunning royal residence with beautiful architecture and a museum.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='sayaji.jpg') }}" alt="Sayaji Baug">
+                            <strong>Sayaji Baug</strong> - A sprawling garden with a zoo, planetarium, and toy train.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='museum.jpg') }}" alt="Baroda Museum">
+                            <strong>Baroda Museum</strong> - A museum showcasing art, sculpture, and historical artifacts.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='sursagar2.jpeg') }}" alt="Sursagar Lake">
+                            <strong>Sursagar Lake</strong> - A serene lake with a towering statue of Lord Shiva in the middle.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="travel-tips">
+                    <h2>Travel Tips</h2>
+                    <p><strong>Best time to visit:</strong> November to February, when the weather is cool and pleasant.</p>
+                    <p><strong>Must-try food:</strong> Sev Usal, Khaman, and the famous Gujarati Thali.</p>
+                    <p><strong>Local festivals:</strong> Don't miss the Navratri celebrations in Vadodara!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

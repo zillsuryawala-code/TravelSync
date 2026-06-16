@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleshmd.css') }}">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('explore') }}">Explore</a>
+                <a href="{{ url_for('hotel') }}">Hotels</a>
+                <a href="{{ url_for('aboutus') }}">About Us</a>
+                <a href="{{ url_for('contactus') }}">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="city-details">
+            <div class="container">
+                <h1>Surat</h1>
+                <p>The diamond city of India, known for its thriving textile industry, delicious street food, and vibrant culture.</p>
+                
+                <div class="attractions">
+                    <h2>Top Attractions</h2>
+                    <ul>
+                        
+                        <li>
+                            <img src="{{ url_for('static', filename='sarthana.jpg') }}" alt="Sarthana Nature Park">
+                            <strong>Sarthana Nature Park</strong> - A lush green park with a zoo and a variety of flora and fauna.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='sardarpatel.webp') }}" alt="Sardar Patel Museum">
+                            <strong>Sardar Patel Museum</strong> - A museum showcasing artifacts, sculptures, and historical exhibits.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='dutch-garden.jpeg') }}" alt="Dutch Garden">
+                            <strong>Dutch Garden</strong> - A serene garden with Dutch-style architecture and beautiful fountains.
+                        </li>
+                        <li>
+                            <img src="{{ url_for('static', filename='gopi.jpeg') }}" alt="Gopi Talav">
+                            <strong>Gopi Talav</strong> - A historic lake surrounded by gardens and walking paths.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="travel-tips">
+                    <h2>Travel Tips</h2>
+                    <p><strong>Best time to visit:</strong> October to March, when the weather is pleasant.</p>
+                    <p><strong>Must-try food:</strong> Locho, Ghari, and the famous Surati street food.</p>
+                    <p><strong>Local festivals:</strong> Don't miss the Navratri celebrations in Surat!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

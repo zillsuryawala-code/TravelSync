@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+</head>
+<body>
+    <div class="admin-wrapper">
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <h2>Admin Panel</h2>
+            <ul>
+                <!-- In sidebar -->
+                <li><a href="{{ url_for('manage_hotels') }}">Manage Hotels</a></li>
+                <li><a href="{{ url_for('manage_feedback') }}">Manage Feedback</a></li>
+                <li><a class="logout" href="{{ url_for('admin_logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <h1>Welcome, {{ session.admin_username }}</h1>
+            <p>This is your admin dashboard.</p>
+
+            <div class="card-container">
+                <!-- Manage Hotels -->
+                 
+                    <h2>Manage Hotels</h2>
+                    <p>View, Add, Edit & Delete Hotel Listings</p>
+                </a>
+
+                <!-- Manage Feedback -->
+                 
+                    <h2>Manage Feedback</h2>
+                    <p>Review User Feedback & Ratings</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

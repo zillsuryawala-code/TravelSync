@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Hotels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <style>
+        .hotel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .hotel-table th, .hotel-table td {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .hotel-table th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .hotel-table tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            
+            padding: 6px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            margin-top: 5px;
+            padding: 5px 10px;
+        }
+
+        .add-form input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Manage Hotels</h1>
+
+        <!-- Add Hotel Form -->
+        <form class="add-form" action="{{ url_for('add_hotel') }}" method="POST">
+            <h2>Add New Hotel</h2>
+            <input type="text" name="hotel_name" placeholder="Hotel Name" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="number" name="price" placeholder="Price" required>
+            <input type="text" name="rating" placeholder="Rating" required>
+            <input type="text" name="location" placeholder="Location" required>
+            <input type="text" name="image_url" placeholder="Image URL" required>
+            <input type="text" name="hotel_link" placeholder="Hotel Link" required>
+            <button type="submit">Add Hotel</button>
+        </form>
+
+        <!-- Hotel Table -->
+        <table class="hotel-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hotel Name</th>
+                    <th>City</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    <th>Location</th>
+                    <th>Image</th>
+                    <th>Link</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hotel in hotels %}
+                <tr>
+                    <form action="{{ url_for('edit_hotel', hotel_id=hotel.hotel_id) }}" method="POST">
+                        <td>{{ hotel.hotel_id }}</td>
+                        <td><input type="text" name="hotel_name" value="{{ hotel.hotel_name }}"></td>
+                        <td><input type="text" name="city" value="{{ hotel.city }}"></td>
+                        <td><input type="number" name="price" value="{{ hotel.price }}"></td>
+                        <td><input type="text" name="rating" value="{{ hotel.rating }}"></td>
+                        <td><input type="text" name="location" value="{{ hotel.location }}"></td>
+                        <td><img src="{{ hotel.image_url }}" alt="Image" width="80"></td>
+                        <td><a href="{{ hotel.hotel_link }}" target="_blank">Visit</a></td>
+                        <td>
+                            <button type="submit">Update</button>
+                    </form>
+                    <form action="{{ url_for('delete_hotel', hotel_id=hotel.hotel_id) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this hotel?')">Delete</button>
+                    </form>
+                        </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

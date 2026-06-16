@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotels - TravelSync</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hotelabad2.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <header>
+    <div class="menu">
+      <a href="h1.html" class="logo">
+        <img src="{{ url_for('static', filename='logo2.png') }}" alt="TravelSync Logo">
+        <span>TravelSync</span>
+      </a>
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('hotel') }}">Hotels</a>
+        <a href="{{ url_for('aboutus') }}">About Us</a>
+        <a href="{{ url_for('contactus') }}">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="search-container">
+    <div class="travel-elements" id="travelElements"></div>
+    <div class="search-content">
+      <h1 class="search-title animate__animated animate__fadeIn">Find Your Perfect Stay</h1>
+      <form id="search-form" class="search-filters animate__animated animate__fadeInUp">
+        <div class="filter-row">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search by hotel name...">
+          <select id="cityFilter" class="form-control">
+            <option value="">All Cities</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Surat">Surat</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Gandhinagar">Gandhinagar</option>
+            <option value="Dwarka">Dwarka</option>
+            <option value="Somnath">Somnath</option>
+            <option value="Rann of Kutch">Rann of Kutch</option>
+            <option value="Bhuj">Bhuj</option>
+          </select>
+          <select id="priceSort" class="form-control">
+            <option value="">Price Range</option>
+            <option value="low">₹0 - ₹3000</option>
+            <option value="medium">₹3000 - ₹6000</option>
+            <option value="high">₹6000+</option>
+          </select>
+          <select id="ratingSort" class="form-control">
+            <option value="">Sort by Rating</option>
+            <option value="high">Highest First</option>
+            <option value="low">Lowest First</option>
+          </select>
+          <button type="button" id="resetBtn" class="form-control book-btn" style="max-width: 150px;">
+            <i class="fas fa-undo"></i> Reset
+          </button>
+          <button type="submit" class="form-control book-btn" style="max-width: 150px;">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main>
+    <section id="hotels">
+      <div id="sectionTitle" class="section-title animate__animated animate__fadeIn">
+        <h2>Featured Hotels in Gujarat</h2>
+        <p>Discover the finest accommodations across Gujarat's most vibrant cities</p>
+      </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Slideshow functionality
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+    
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+    
+    // Show more/less hotels functionality
+    document.querySelectorAll('.show-more-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const citySection = this.closest('.city-hotels');
+            const hiddenHotels = citySection.querySelectorAll('.hidden-hotel');
+            const isShowingMore = this.textContent.includes('More');
+            
+            // Toggle hidden hotels with animation
+            hiddenHotels.forEach(hotel => {
+                if (isShowingMore) {
+                    hotel.style.display = 'block';
+                    hotel.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    hotel.style.animation = 'fadeOut 0.5s ease-in-out';
+                    setTimeout(() => {
+                        hotel.style.display = 'none';
+                    }, 500);
+                }
+            });
+            
+            // Toggle button text and icon
+            if (isShowingMore) {
+                this.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+            } else {
+                this.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
+                // Smooth scroll to button position when hiding content
+                this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+        const cityFilter = document.getElementById('cityFilter').value;
+        const priceSort = document.getElementById('priceSort').value;
+        const ratingSort = document.getElementById('ratingSort').value;
+        
+        // Filter hotels based on search criteria
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            const hotelName = card.querySelector('h4').textContent.toLowerCase();
+            const hotelCity = card.dataset.city;
+            const hotelPrice = parseFloat(card.querySelector('.hotel-price').textContent.replace(/[^0-9.]/g, ''));
+            const hotelRating = parseFloat(card.querySelector('.hotel-rating span').textContent.split('/')[0]);
+            
+            const matchesSearch = hotelName.includes(searchTerm);
+            const matchesCity = !cityFilter || hotelCity === cityFilter;
+            let matchesPrice = true;
+            let matchesRating = true;
+            
+            if (priceSort === 'low') matchesPrice = hotelPrice <= 3000;
+            else if (priceSort === 'medium') matchesPrice = hotelPrice > 3000 && hotelPrice <= 6000;
+            else if (priceSort === 'high') matchesPrice = hotelPrice > 6000;
+            
+            if (ratingSort === 'high') matchesRating = hotelRating >= 4;
+            else if (ratingSort === 'low') matchesRating = hotelRating < 4;
+            
+            card.style.display = (matchesSearch && matchesCity && matchesPrice && matchesRating) ? 'block' : 'none';
+        });
+    });
+    
+    // Reset functionality
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        document.getElementById('searchBar').value = '';
+        document.getElementById('cityFilter').value = '';
+        document.getElementById('priceSort').value = '';
+        document.getElementById('ratingSort').value = '';
+        
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            card.style.display = 'block';
+        });
+    });
+});
+
+// CSS animations for showing/hiding hotels
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
+    }
+`;
+document.head.appendChild(style);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const travelContainer = document.getElementById('travelElements');
+    
+    // Create 5 clouds
+    for (let i = 0; i < 5; i++) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.style.width = `${100 + Math.random() * 100}px`;
+        cloud.style.height = `${60 + Math.random() * 40}px`;
+        cloud.style.top = `${10 + Math.random() * 30}%`;
+        cloud.style.animationDuration = `${60 + Math.random() * 60}s`;
+        cloud.style.animationDelay = `${Math.random() * 20}s`;
+        travelContainer.appendChild(cloud);
+    }
+    
+    // Create 2 paper planes
+    for (let i = 0; i < 2; i++) {
+        const plane = document.createElement('div');
+        plane.classList.add('paper-plane');
+        plane.style.animationDuration = `${15 + Math.random() * 10}s`;
+        plane.style.animationDelay = `${Math.random() * 5}s`;
+        travelContainer.appendChild(plane);
+    }
+    
+});
+
+</script>
+</body>
+</html>

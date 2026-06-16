@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TravelSync</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    });
+</script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+
+        :root {
+    /* Dark mode colors */
+    --dark-bg: #121212;
+    --dark-text: #e0e0e0;
+    --dark-card: #1e1e1e;
+    --dark-border: #333;
+    --dark-accent: #bb86fc;
+    --dark-primary: #3700b3;
+    --dark-gray: #a0a0a0;
+    --dark-light-gray: #2d2d2d;
+}
+
+/* ==================== */
+/* Dark Mode Base Styles */
+/* ==================== */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* ==================== */
+/* Header & Navigation  */
+/* ==================== */
+body.dark-mode header {
+    background-color: var(--dark-card);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .menu nav a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .menu nav a:hover {
+    color: var(--dark-accent);
+}
+
+/* ==================== */
+/* Hero Section         */
+/* ==================== */
+body.dark-mode .about-hero {
+    background: linear-gradient(rgba(55, 0, 179, 0.8), rgba(55, 0, 179, 0.9)), 
+                url('/static/images/about-bg.jpg');
+}
+
+/* ==================== */
+/* Content Sections     */
+/* ==================== */
+body.dark-mode .about-content h2 {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .about-content p {
+    color: var(--dark-gray);
+}
+
+body.dark-mode .mission-card,
+body.dark-mode .vision-card,
+body.dark-mode .team-member,
+body.dark-mode .testimonial-card {
+    background-color: var(--dark-card);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .mission-card h3,
+body.dark-mode .vision-card h3,
+body.dark-mode .team-section h2,
+body.dark-mode .testimonials h2 {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .member-info h3 {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .member-info p,
+body.dark-mode .author-info p {
+    color: var(--dark-gray);
+}
+
+/* ==================== */
+/* Stats Section        */
+/* ==================== */
+body.dark-mode .stats-section {
+    background: linear-gradient(rgba(55, 0, 179, 0.9), rgba(55, 0, 179, 0.9)), 
+                url('/static/images/stats-bg.jpg');
+}
+
+/* ==================== */
+/* Testimonials         */
+/* ==================== */
+body.dark-mode .testimonial-card::before {
+    color: rgba(187, 134, 252, 0.1);
+}
+
+/* ==================== */
+/* Social Links         */
+/* ==================== */
+body.dark-mode .social-link {
+    background-color: var(--dark-light-gray);
+    color: var(--dark-text);
+}
+
+body.dark-mode .social-link:hover {
+    background-color: var(--dark-accent);
+    color: var(--dark-card);
+}
+
+/* ==================== */
+/* Footer               */
+/* ==================== */
+body.dark-mode footer {
+    background-color: var(--dark-card);
+    border-top: 1px solid var(--dark-border);
+}
+
+/* ==================== */
+/* Dark Mode Toggle     */
+/* ==================== */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: var(--dark-accent);
+    color: var(--dark-card);
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles (Consistent with other pages) */
+        header {
+            background: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+
+        .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+}
+
+.logo i {
+    color: var(--accent);
+}
+
+        .menu nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu nav a:hover {
+            color: var(--primary);
+            transform: scale(1.1); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* About Us Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(67, 97, 238, 0.9)), url('/static/images/about-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-content h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 400px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .mission-card, .vision-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mission-card h3, .vision-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card i, .vision-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .team-section {
+            margin: 4rem 0;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .stats-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(67, 97, 238, 0.9)), url('/static/images/stats-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 1rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .testimonials {
+            margin: 4rem 0;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--light-gray);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 300px;
+                grid-row: 1;
+            }
+            
+            .menu nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu">
+          <a href="h1.html" class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="TravelSync Logo">
+            <span>TravelSync</span>
+          </a>
+          <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('explore') }}">Explore</a>
+            <a href="{{ url_for('hotel') }}">Hotels</a>
+            <a href="{{ url_for('aboutus') }}">About Us</a>
+            <a href="{{ url_for('contactus') }}">Contact Us</a>
+          </nav>
+        </div>
+    </header>
+
+    <section class="about-hero">
+        <h1>Our Story</h1>
+        <p>Discover the journey behind TravelSync and our passion for creating unforgettable travel experiences</p>
+    </section>
+
+    <div class="about-container">
+        <section class="about-section">
+            <div class="about-content">
+                <h2>Who We Are</h2>
+                <p>Founded in 2020, TravelSync began as a small team of travel enthusiasts with a big dream: to make travel planning seamless and enjoyable for everyone. What started as a local travel agency in Ahmedabad has now grown into one of Gujarat's leading online travel platforms.</p>
+                <p>Our mission is simple - to connect travelers with the best accommodations and experiences while providing exceptional service at every step of the journey. We believe that travel should be about creating memories, not stress.</p>
+                <p>Today, we're proud to serve thousands of happy customers across India, with a special focus on showcasing the incredible hospitality of Gujarat.</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='b1.jpg') }}" alt="Team photo">
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='b2.jpg') }}" alt="Our journey">
+            </div>
+            <div class="about-content">
+                <h2>Our Journey</h2>
+                <p>From our humble beginnings with just three employees and a single office, we've grown exponentially while maintaining our commitment to personalized service. Our growth has been fueled by our dedication to innovation and customer satisfaction.</p>
+                <p>In 2021, we launched our online platform, revolutionizing how travelers in Gujarat book accommodations. By 2023, we had partnered with over 500 hotels across the state, and in 2024, we expanded our services to include curated travel experiences.</p>
+                <p>Despite our growth, we've remained true to our roots, with our headquarters still in Ahmedabad and most of our team hailing from Gujarat communities.</p>
+            </div>
+        </section>
+
+        <div class="mission-vision">
+            <div class="mission-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
+                <p>To simplify travel by connecting people with the perfect accommodations while delivering exceptional service that exceeds expectations at every touchpoint.</p>
+            </div>
+            <div class="vision-card">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>To become Gujarat's most trusted travel platform, known for our innovative solutions, local expertise, and commitment to creating memorable experiences.</p>
+            </div>
+        </div>
+
+        <section class="stats-section">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <h3 data-target="65">0</h3>
+                <p>Hotel Partners</p>
+              </div>
+              <div class="stat-item">
+                <h3 data-target="500">0</h3>
+                <p>Happy Travelers</p>
+              </div>
+              <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Customer Support</p>
+              </div>
+              <div class="stat-item">
+                <h3 data-target="95" data-suffix="%">0</h3>
+                <p>Positive Reviews</p>
+              </div>
+            </div>
+          </section>
+          
+
+        <section class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='b3.jpg') }}" alt="Rahul Patel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Rahul Patel</h3>
+                        <p>Founder & CEO</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='b4.jpg') }}" alt="Priya Sharma">
+                    </div>
+                    <div class="member-info">
+                        <h3>Priya Sharma</h3>
+                        <p>Head of Operations</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='b5.jpg') }}" alt="Vikram Mehta">
+                    </div>
+                    <div class="member-info">
+                        <h3>Vikram Mehta</h3>
+                        <p>Technology Director</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='b6.jpg') }}" alt="Anjali Desai">
+                    </div>
+                    <div class="member-info">
+                        <h3>Anjali Desai</h3>
+                        <p>Customer Experience</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>TravelSync made my Gujarat trip unforgettable! Their hotel recommendations were perfect, and their 24/7 support team helped me when I needed to make last-minute changes.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="{{ url_for('static', filename='a7.jpg') }}" alt="Arjun Kapoor">
+                        </div>
+                        <div class="author-info">
+                            <h4>Arjun Kapoor</h4>
+                            <p>Frequent Traveler</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>As a local business owner, I partner with TravelSync for all my clients' accommodation needs. Their professionalism and attention to detail are unmatched in the industry.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="{{ url_for('static', filename='a8.jpg') }}" alt="Neha Gupta">
+                        </div>
+                        <div class="author-info">
+                            <h4>Neha Gupta</h4>
+                            <p>Tour Operator</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>I was skeptical about booking online, but TravelSync's team walked me through every step. The hotel they recommended exceeded all my expectations!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="{{ url_for('static', filename='a9.jpg') }}" alt="Rajesh Iyer">
+                        </div>
+                        <div class="author-info">
+                            <h4>Rajesh Iyer</h4>
+                            <p>First-time User</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 TravelSync. All rights reserved.</p>
+        <div class="footer-links" style="margin-top: 1rem;">
+            <a href="#" style="color: var(--white); margin: 0 10px;">Privacy Policy</a>
+            <a href="#" style="color: var(--white); margin: 0 10px;">Terms of Service</a>
+            <a href="#" style="color: var(--white); margin: 0 10px;">Careers</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for stats counting
+        document.addEventListener('DOMContentLoaded', function () {
+    const statItems = document.querySelectorAll('.stat-item h3');
+
+    statItems.forEach(item => {
+        const target = parseInt(item.getAttribute('data-target'));
+        const suffix = item.getAttribute('data-suffix') || '+';
+
+        // Skip animation if no target
+        if (!target) return;
+
+        let current = 0;
+        const increment = Math.ceil(target / 30);
+
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+                item.textContent = current + suffix;
+                setTimeout(updateCount, 50);
+            } else {
+                item.textContent = target + suffix;
+            }
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                updateCount();
+                observer.unobserve(item);
+            }
+        });
+
+        observer.observe(item);
+    });
+});
+
+
+        
+    let lastScrollTop = 0;
+    const menu = document.querySelector('header');
+    
+    window.addEventListener('scroll', function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+      if (scrollTop > lastScrollTop) {
+          menu.style.transform = 'translateY(-100%)';
+      } else {
+          menu.style.transform = 'translateY(0)';
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+
+    </script>
+</body>
+</html>

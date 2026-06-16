@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Available Hotels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <h1>Hotels in {{ destination }}</h1>
+        <p class="subtitle">Budget: {{ amount }} | Days: {{ days }}</p>
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+    </header>
+    
+    <div class="container">
+        {% if hotels %}
+            <ul>
+                {% for hotel in hotels %}
+                    <li>
+                        <div class="card-header">
+                            <h3>{{ hotel.hotel_name }}</h3>
+                            <div class="hotel-images">
+                                <!-- Main image always shown first -->
+                                <img src="{{ hotel.image_url }}" alt="{{ hotel.hotel_name }}" class="active">
+                                
+                                <!-- Additional images from slider -->
+                                {% for image_url in hotel.images %}
+                                    <img src="{{ image_url }}" alt="{{ hotel.hotel_name }}">
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <p class="card-description">
+                                <strong>Price:</strong> {{ hotel.price }}<br>
+                                <strong>Rating:</strong> {{ hotel.rating }}<br>
+                                <strong>Amenities:</strong> {{ hotel.amenities }}
+                            </p>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="{{ hotel.hotel_link }}" class="view-hotel" target="_blank" rel="noopener noreferrer">
+                                View Hotel
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-results">No hotels found within your budget.</p>
+        {% endif %}
+
+        {% if destination.lower() == 'ahmedabad' %}
+         <a href="{{ url_for('ahmedabad') }}" class="btn btn-primary">Explore Ahmedabad</a>
+        {% elif destination.lower() == 'surat' %}
+         <a href="{{ url_for('surat') }}" class="btn btn-primary">Explore Surat</a>
+        {% elif destination.lower() == 'baroda' %}
+          <a href="{{ url_for('baroda') }}" class="btn btn-primary">Explore Baroda</a>
+          {% elif destination.lower() == 'dwarka' %}
+          <a href="{{ url_for('dwarka') }}" class="btn btn-primary">Explore Dwarka</a>
+          {% elif destination.lower() == 'gandhinagar' %}
+          <a href="{{ url_for('gandhinagar') }}" class="btn btn-primary">Explore Gandhinagar</a>
+          {% elif destination.lower() == 'baroda' %}
+          <a href="{{ url_for('somnath') }}" class="btn btn-primary">Explore Somnath</a>
+          {% elif destination.lower() == 'kutch' %}
+          <a href="{{ url_for('kutch') }}" class="btn btn-primary">Explore Kutch</a>
+          {% elif destination.lower() == 'bhuj' %}
+          <a href="{{ url_for('bhuj') }}" class="btn btn-primary">Explore Bhuj</a>
+        {% endif %}
+
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize sliders for each hotel
+            document.querySelectorAll('.hotel-images').forEach(slider => {
+                const images = slider.querySelectorAll('img');
+                const dotsContainer = document.createElement('div');
+                dotsContainer.className = 'slider-dots';
+                
+                // Only create dots if we have multiple images
+                if (images.length > 1) {
+                    images.forEach((_, index) => {
+                        const dot = document.createElement('span');
+                        dot.className = 'dot';
+                        if(index === 0) dot.classList.add('active');
+                        dot.addEventListener('click', () => showImage(slider, index));
+                        dotsContainer.appendChild(dot);
+                    });
+                    
+                    slider.parentNode.insertBefore(dotsContainer, slider.nextSibling);
+                    
+                    // Auto-rotate images every 5 seconds if multiple images
+                    let currentIndex = 0;
+                    setInterval(() => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        showImage(slider, currentIndex);
+                    }, 5000);
+                }
+            });
+            
+            function showImage(slider, index) {
+                const images = slider.querySelectorAll('img');
+                const dotsContainer = slider.nextElementSibling;
+                
+                // Update dots if they exist
+                if (dotsContainer && dotsContainer.classList.contains('slider-dots')) {
+                    const dots = dotsContainer.querySelectorAll('.dot');
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+                
+                // Update images
+                images.forEach(img => img.classList.remove('active'));
+                images[index].classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

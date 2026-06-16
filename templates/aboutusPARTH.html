@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AI Tours & Travels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesabtus.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- AOS for scroll animations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+    AOS.init();
+</script>
+
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="explore.html">Explore</a>
+                <a href="hotel.html">Hotels</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="margin-top: 80px;">
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;"><i class="fas fa-users"></i> About Us</h2>
+                <p class="tagline" style="text-align: center; margin-bottom: 3rem;">Welcome to <strong>AI Tours & Travels</strong>, where technology meets wanderlust</p>
+
+                <div class="about-image" style="text-align: center; margin: 0 auto; max-width: 1000px; padding: 0 20px;">
+                    <img src="../images/about us.jpeg" alt="About Us" class="featured-image" style="width: 100%; height: auto; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); transition: transform 0.3s ease; display: block; margin: 0 auto;">
+                </div>
+                
+                <div class="about-content" style="margin-top: 3rem;">
+                    <div class="about-text" style="max-width: 1000px; margin: 0 auto;">
+                        <div class="info-card" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <h3 class="card-title"><i class="fas fa-bullseye"></i> Our Mission</h3>
+                            <p class="card-text">Our mission is to revolutionize travel experiences through AI-powered personalization. We make your journey seamless, memorable, and uniquely yours.</p>
+                        </div>
+                        
+                        <div class="info-card" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <h3 class="card-title"><i class="fas fa-history"></i> Our Story</h3>
+                            <p class="card-text">Established in 2023, we emerged from a vision to blend the art of travel with cutting-edge technology. Our journey began with a simple idea: make travel planning smarter and more intuitive.</p>
+                        </div>
+                        
+                        <div class="info-card" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <h3 class="card-title"><i class="fas fa-star"></i> Our Team</h3>
+                            <p class="card-text">Behind every great journey is an amazing team. Our experts combine their passion for travel with technical expertise to craft perfect getaways for you.</p>
+                        </div>
+
+                        <div class="cta-buttons" style="text-align: center; margin-top: 3rem;">
+                            <a href="contactus.html" class="cta-btn primary" style="background: linear-gradient(135deg, #41adc0, #34495e); color: white; text-decoration: none; margin: 0 1rem; transition: all 0.3s ease;">Get in Touch</a>
+                            <a href="explore.html" class="cta-btn secondary" style="background: rgba(255, 255, 255, 0.9); color: #41adc0; text-decoration: none; margin: 0 1rem; transition: all 0.3s ease; border: 2px solid #41adc0;">Start Exploring</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: rgba(248, 249, 250, 0.9); backdrop-filter: blur(10px); padding: 2rem 0; margin-top: 4rem;">
+        <div class="social-links" style="text-align: center; margin-bottom: 1rem;">
+            <a href="#" class="social-link" style="color: #41adc0; margin: 0 1rem; transition: all 0.3s ease;"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link" style="color: #41adc0; margin: 0 1rem; transition: all 0.3s ease;"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link" style="color: #41adc0; margin: 0 1rem; transition: all 0.3s ease;"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" style="color: #41adc0; margin: 0 1rem; transition: all 0.3s ease;"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p class="copyright" style="text-align: center; color: #666;">&copy; 2023 AI Tours & Travels. All rights reserved.</p>
+    </footer>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f8f9fa, #e6f4f7);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #2d3436;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+            font-weight: 400;
+            color: #636e72;
+        }
+
+        .card-title {
+            font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 1rem;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-text {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 300;
+            color: #636e72;
+        }
+
+        .nav-link {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2) !important;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 500;
+            padding: 1em 2em;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: #34495e;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+
+            .about-content {
+                padding: 0 1rem;
+            }
+
+            .cta-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-btn {
+                margin: 0;
+            }
+        }
+    </style>
+</body>
+</html>
